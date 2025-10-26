@@ -1,0 +1,68 @@
+#include <stdio.h>
+
+int main() {
+    int arr[3][3][3];
+    int identicalCount = 0;
+
+    
+    printf("Enter 27 elements for the 3×3×3 matrix:\n");
+    for (int i = 0; i < 3; i++) {           
+        printf("\nEnter elements for Layer %d:\n", i + 1);
+        for (int j = 0; j < 3; j++) {       
+            for (int k = 0; k < 3; k++) {   
+                printf("arr[%d][%d][%d] = ", i, j, k);
+                scanf("%d", &arr[i][j][k]);
+            }
+        }
+    }
+
+    
+    printf("\n=========== DISPLAYING ALL LAYERS ===========\n");
+    for (int i = 0; i < 3; i++) {
+        printf("\nLayer %d:\n", i + 1);
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                printf("%4d", arr[i][j][k]);
+            }
+            printf("\n");
+        }
+    }
+
+    
+    printf("\n=========== LAYER COMPARISON RESULTS ===========\n");
+
+    for (int layer1 = 0; layer1 < 3; layer1++) {
+        for (int layer2 = layer1 + 1; layer2 < 3; layer2++) {
+            int isIdentical = 1;  
+
+            for (int i = 0; i < 3; i++) {
+                for (int j = 0; j < 3; j++) {
+                    if (arr[layer1][i][j] != arr[layer2][i][j]) {
+                        isIdentical = 0;
+                        break;
+                    }
+                }
+                if (isIdentical == 0) break;
+            }
+
+            if (isIdentical) {
+                printf("Layer %d and Layer %d are IDENTICAL.\n", layer1 + 1, layer2 + 1);
+                identicalCount++;
+            } else {
+                printf(" Layer %d and Layer %d are DIFFERENT.\n", layer1 + 1, layer2 + 1);
+            }
+        }
+    }
+
+    
+    printf("\n=========== FINAL ANALYSIS ===========\n");
+    if (identicalCount == 0) {
+        printf("All layers are distinct — no identical layers found.\n");
+    } else if (identicalCount == 3) {
+        printf("All three layers are identical!\n");
+    } else {
+        printf("%d pair(s) of layers are identical.\n", identicalCount);
+    }
+
+    return 0;
+}
