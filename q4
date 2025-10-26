@@ -1,0 +1,57 @@
+#include <stdio.h>
+
+int main() {
+    int arr[3][3][3];
+    int layerSum[3] = {0};
+    int totalSum = 0;
+
+    printf("Enter 27 elements for the 3×3×3 array:\n");
+
+    for (int i = 0; i < 3; i++) {           
+        printf("\nEnter elements for Layer %d:\n", i + 1);
+        for (int j = 0; j < 3; j++) {       
+            for (int k = 0; k < 3; k++) {   
+                printf("arr[%d][%d][%d] = ", i, j, k);
+                scanf("%d", &arr[i][j][k]);
+            }
+        }
+    }
+
+    
+    printf("\n========== LAYER ANALYSIS ==========\n");
+    for (int i = 0; i < 3; i++) {
+        printf("\nLayer %d:\n", i + 1);
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                printf("%4d", arr[i][j][k]);
+                layerSum[i] += arr[i][j][k];
+                totalSum += arr[i][j][k];
+            }
+            printf("\n");
+        }
+        printf("→ Sum of Layer %d = %d\n", i + 1, layerSum[i]);
+    }
+
+    
+    float average = totalSum / 27.0;
+    int max = arr[0][0][0], min = arr[0][0][0];
+
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < 3; j++) {
+            for (int k = 0; k < 3; k++) {
+                if (arr[i][j][k] > max)
+                    max = arr[i][j][k];
+                if (arr[i][j][k] < min)
+                    min = arr[i][j][k];
+            }
+        }
+    }
+
+    printf("\n========== OVERALL ANALYSIS ==========\n");
+    printf("Total Sum of All Elements = %d\n", totalSum);
+    printf("Average of All Elements   = %.2f\n", average);
+    printf("Maximum Value in 3D Array = %d\n", max);
+    printf("Minimum Value in 3D Array = %d\n", min);
+
+    return 0;
+}
